@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masoud Talebi - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="matrix"></canvas>
+    <header>
+        <h1>Masoud Talebi</h1>
+        <p>webdesigner & Frontend
+            Developer</p>
+        <nav>
+            <ul>
+                <li><a href="#about">Über mich</a></li>
+                <li><a href="#projects">Projekte</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="about">
+        <h2>Über mich</h2>
+        <div class="about-container">
+            <img src="images/profil.png" alt="Masoud Talebi" class="profile-pic">
+            <p>
+                Hallo! Ich bin Masoud, angehender Webdesigner und Frontend-Entwickler.
+                In den letzten Jahren habe ich mich intensiv mit HTML, CSS und JavaScript beschäftigt
+                und eigene Projekte in VS Code entwickelt.
+                Ich liebe es, kreative Ideen in moderne und responsive Websites umzusetzen.
+
+            </p>
+        </div>
+    </section>
+    <section id="skills-chart">
+        <h2>Meine Skills Chart</h2>
+        <div class="chart">
+            <div class="bar" style="height: 120px;" title="HTML 95%">
+                <span class="percent">HTML 95%</span>
+            </div>
+            <div class="bar" style="height: 100px;" title="CSS 80%">
+                <span class="percent">CSS 80%</span>
+            </div>
+            <div class="bar" style="height: 85px;" title="JavaScript 70%">
+                <span class="percent">JAVASCRIPT 70%</span>
+            </div>
+            <div class="bar" style="height: 60px;" title="React 50%">
+                <span class="percent">REACT 50%</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projekte</h2>
+        <div class="projects-grid">
+            <div class="project">
+                <img src="images/projekt1.JPG" alt="Projekt 1">
+                <div class="overlay">
+                    <h3>Projekt 1</h3>
+                    <p>Kurzbeschreibung vom Projekt 1.</p>
+                    <a href="#" class="project-btn">Mehr erfahren</a>
+                </div>
+            </div>
+            <div class="project">
+                <img src="images/projekt2.JPG" alt="Projekt 1">
+                <div class="overlay">
+                    <h3>Projekt 2</h3>
+                    <p>Kurzbeschreibung vom Projekt 2.</p>
+                    <a href="#" class="project-btn">Mehr erfahren</a>
+                </div>
+            </div>
+            <div class="project">
+                <img src="images/projekt3.JPG" alt="Projekt 1">
+                <div class="overlay">
+                    <h3>Projekt 3</h3>
+                    <p>Kurzbeschreibung vom Projekt 3.</p>
+                    <a href="#" class="project-btn">Mehr erfahren</a>
+                </div>
+            </div>
+            <div class="project">
+                <img src="images/projekt4.JPG" alt="Projekt 1">
+                <div class="overlay">
+                    <h3>Projekt 4</h3>
+                    <p>Kurzbeschreibung vom Projekt 4.</p>
+                    <a href="#" class="project-btn">Mehr erfahren</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <p>Email: masoudtalebi1989@gmail.com</p>
+    </section>
+    <div class="social-links">
+        <a href="https://github.com/masoudtalebi" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/masoudtalebi" target="_blank">LinkedIn</a>
+        <a href="https://www.behance.net/masoudtalebi" target="_blank">Behance</a>
+    </div>
+    <footer>
+        <p>&copy; 2025 Masoud Talebi</p>
+    </footer>
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ffff'; // رنگ حروف (آبی ماتریکس)
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+
+</body>
+
+</html>
